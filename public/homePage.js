@@ -31,7 +31,7 @@ moneyManager.addMoneyCallback = data => {
             moneyManager.setMessage(true, "успех");
             return; 
         }
-        moneyManager.setMessage(false, "провал");                          
+        moneyManager.setMessage(false, response.error);                          
     }))    
 }
 moneyManager.conversionMoneyCallback = data => {
@@ -41,7 +41,7 @@ moneyManager.conversionMoneyCallback = data => {
             moneyManager.setMessage(true, "успех");
             return; 
         }
-        moneyManager.setMessage(false, "провал");                          
+        moneyManager.setMessage(false, response.error);                          
     }))    
 }
 moneyManager.sendMoneyCallback = data => {
@@ -51,7 +51,7 @@ moneyManager.sendMoneyCallback = data => {
             moneyManager.setMessage(true, "успех");
             return; 
         }
-        moneyManager.setMessage(false, "провал");                          
+        moneyManager.setMessage(false, response.error);                          
     }))    
 }
 
@@ -65,14 +65,15 @@ ApiConnector.getFavorites((response) => {
 })
 
 favoritesWidget.addUserCallback = data => {
-    ApiConnector.addUserToFavorites(data, ((response) => {                  
+    ApiConnector.addUserToFavorites(data, ((response) => {  
+        console.log(response);                
         if(response.success){
             favoritesWidget.clearTable();
             favoritesWidget.fillTable(response.data);
-            moneyManager.setMessage(true, "успех");
+            favoritesWidget.setMessage(true, "успех");
             return; 
         }
-        moneyManager.setMessage(false, "провал");                          
+        favoritesWidget.setMessage(false, response.error);                          
     }))    
 } 
 favoritesWidget.removeUserCallback = data => {
@@ -80,9 +81,9 @@ favoritesWidget.removeUserCallback = data => {
         if(response.success){
             favoritesWidget.clearTable();
             favoritesWidget.fillTable(response.data);
-            moneyManager.setMessage(true, "успех");
+            favoritesWidget.setMessage(true, "успех");
             return; 
         }
-        moneyManager.setMessage(false, "провал");                          
+        favoritesWidget.setMessage(false, response.error);                          
     }))    
 } 
